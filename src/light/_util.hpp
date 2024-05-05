@@ -23,6 +23,7 @@ CRGB maxColor(CRGB c1, CRGB c2)
 void fill(CRGB color, int start, int size, CRGB *leds) {
   int end = start + size;
   if (end >= PIXELS) end = PIXELS;
+
   for (int i = start; i < end; i++) {
     CRGB combined = combineColor(leds[i], CRGB(color));
     leds[i] = combined;

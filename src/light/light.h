@@ -8,23 +8,25 @@
 #define PIXELS 571
 CRGB leds[PIXELS];
 
-#define STEPS 12
-int stepsize[STEPS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
-int stairOffset[STEPS] = {0};
+#define STAIRS 12
+byte stepsize[STAIRS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
+short stepOffset[STAIRS] = {0};
 
-#include "generator/breath.hpp"
+#include "generator/sweep.hpp"
 #include "generator/generator.hpp"
-AbstractGenerator* generator = new Breath();
+AbstractGenerator* generator = new Sweep();
 
 void initLight() {
+  Serial.println("Pixels: " + String(PIXELS) + " Stairs: " + String(STAIRS));
+
   FastLED.addLeds<WS2813, LIGHTPIN, GRB>(leds, PIXELS);
   FastLED.clear();
   FastLED.setBrightness(100);
 
   // init stairOffset
   int offset = 0;
-  for (unsigned int i = 0; i < STEPS; i++) {
-    stairOffset[i] = offset;
+  for (unsigned int i = 0; i < STAIRS; i++) {
+    stepOffset[i] = offset;
     offset += stepsize[i];
   }
   FastLED.show();
