@@ -3,6 +3,7 @@
 
 #include <BasicOTA.hpp>
 
+#include "light/light.h"
 #include "pin.h"
 #include "secrets.h"
 
@@ -20,6 +21,9 @@ void setup() {
   Serial.println("setup pins");
   setUpPins();
 
+  Serial.println("setup leds");
+  initLight();
+
   Serial.println("start OTA");
   OTA.begin();
 
@@ -29,4 +33,6 @@ void setup() {
 
 void loop() {
   OTA.handle();
+
+  processLeds();
 }
