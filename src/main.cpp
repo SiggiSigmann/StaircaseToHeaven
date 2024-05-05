@@ -1,7 +1,10 @@
 #include <WiFiManager.h>
+#include <arduino.h>
 
 #include <BasicOTA.hpp>
 
+#include "pin.h"
+#include "secrets.h"
 
 BasicOTA OTA;
 
@@ -13,13 +16,15 @@ void setup() {
   while (!wifiManager.autoConnect("Stairs")) {
     Serial.println("wifi retry");
   }
-  Serial.print("wifi connected, IP address: ");
-  Serial.println(WiFi.localIP());
+
+  Serial.println("setup pins");
+  setUpPins();
 
   Serial.println("start OTA");
   OTA.begin();
 
-  Serial.println("done");
+  Serial.println("started");
+  Serial.println("------------------------------------");
 }
 
 void loop() {
