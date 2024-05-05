@@ -51,4 +51,19 @@ void combine(uint32_t color, int start, int size, CRGB *leds)
     }
 }
 
+int getMax(byte arr[], int size) {
+  if (size == 0) {
+    // Return some default value if the array is empty
+    return 0;
+  }
+
+  int max = arr[0];
+  for (size_t i = 1; i < size; ++i) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
+}
+
 #endif

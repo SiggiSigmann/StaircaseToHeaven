@@ -13,8 +13,8 @@ byte stepsize[STAIRS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
 short stepOffset[STAIRS] = {0};
 
 #include "generator/generator.hpp"
-#include "generator/stepByStep.hpp"
-AbstractGenerator* generator = new StepByStep();
+#include "generator/vertical.hpp"
+AbstractGenerator* generator = new Vertical();
 
 void initLight() {
   Serial.println("Pixels: " + String(PIXELS) + " Stairs: " + String(STAIRS));
