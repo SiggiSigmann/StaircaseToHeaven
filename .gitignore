@@ -5,6 +5,7 @@
 .gcc-flags.json
 .pio
 .DS_Store
+/src/secrets.h
 
 # Prerequisites
 *.d
