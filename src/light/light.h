@@ -12,9 +12,9 @@ CRGB leds[PIXELS];
 byte stepsize[STAIRS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
 short stepOffset[STAIRS] = {0};
 
-#include "generator/sweep.hpp"
 #include "generator/generator.hpp"
-AbstractGenerator* generator = new Sweep();
+#include "generator/stepByStep.hpp"
+AbstractGenerator* generator = new StepByStep();
 
 void initLight() {
   Serial.println("Pixels: " + String(PIXELS) + " Stairs: " + String(STAIRS));
