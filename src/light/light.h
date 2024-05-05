@@ -12,11 +12,13 @@ CRGB leds[PIXELS];
 byte stepsize[STAIRS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
 short stepOffset[STAIRS] = {0};
 
+#include "generator/angle.hpp"
 #include "generator/generator.hpp"
-#include "generator/vertical.hpp"
-AbstractGenerator* generator = new Vertical();
+AbstractGenerator* generator;
 
 void initLight() {
+  generator = new Angle();
+
   Serial.println("Pixels: " + String(PIXELS) + " Stairs: " + String(STAIRS));
 
   FastLED.addLeds<WS2813, LIGHTPIN, GRB>(leds, PIXELS);

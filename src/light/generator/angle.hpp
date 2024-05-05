@@ -1,17 +1,42 @@
-#ifndef VERTICAL_H
-#define VERTICAL_H
+#ifndef ANGLE_H
+#define ANGLE_H
 
 #include "../_util.hpp"
 #include "../light.h"
 #include "generator.hpp"
 
-class Vertical : public AbstractGenerator {
+class Angle : public AbstractGenerator {
  public:
+  Angle() {
+    short maxIdx = 0, maxY=0;
+    for (int step = 1; step < STAIRS; step++) {
+      int y = (stepsize[step] / 2) - b - (a * step);
+      if(maxY < y){
+        maxY = y;
+        maxIdx = step;
+      }
+    }
+    start = maxY;
+
+    for (int step = 1; step < STAIRS; step++) {
+      int y = (-stepsize[step] / 2) - b - (a * step);
+      if (maxY > y) {
+        maxY = y;
+        maxIdx = step;
+      }
+    }
+    stop = maxY-1;
+    curr = stop;
+    Serial.println(String(start) + " " + String(stop));
+  }
+
   bool step(CRGB *leds) {
     if (laststep > millis()) return false;
 
     for (int step = 0; step < STAIRS; step++) {
-      int border = (stepsize[step] / 2) + curr;
+      int y = step * a + curr + b;
+
+      int border = (stepsize[step] / 2) + y;
       border = (border > 0) ? border : 0;
 
       for (int ledInStep = 0; ledInStep < stepsize[step]; ledInStep++) {
@@ -39,9 +64,10 @@ class Vertical : public AbstractGenerator {
   void settings(String setting, String value) {}
 
  private:
+  short a = 5, b = 0;
   short maxLength = getMax(stepsize, STAIRS);
-  short start = maxLength - (maxLength / 2);
-  short stop = (maxLength / 2) - maxLength;
+  short start = 20;
+  short stop = -20;
   short curr = start;
   unsigned long laststep = 0;
   bool direction = true;
