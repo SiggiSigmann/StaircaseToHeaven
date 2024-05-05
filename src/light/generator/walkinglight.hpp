@@ -6,7 +6,7 @@
 
 class WalkingLight : public AbstractGenerator {
  public:
-  void step(CRGB *leds) {
+  bool step(CRGB *leds) {
     for (int i = 0; i < PIXELS; i++) leds[i] = 0;
 
     if (pixel >= PIXELS - 1) pixel = -1;
@@ -14,6 +14,8 @@ class WalkingLight : public AbstractGenerator {
     pixel++;
 
     leds[pixel] = CRGB(100, 24, 200);
+
+    return true;
   }
 
   void settings(String setting, String value) {}

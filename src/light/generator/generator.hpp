@@ -5,7 +5,7 @@
 
 class AbstractGenerator{
     public:
-        virtual void step(CRGB *leds) = 0;
+        virtual bool step(CRGB *leds) = 0;
         virtual void settings(String setting, String value) = 0;
 }; 
 

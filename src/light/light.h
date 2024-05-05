@@ -12,9 +12,9 @@ CRGB leds[PIXELS];
 int stepsize[STEPS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
 int stairOffset[STEPS] = {0};
 
+#include "generator/breath.hpp"
 #include "generator/generator.hpp"
-#include "generator/walkinglight.hpp"
-AbstractGenerator* generator = new WalkingLight();
+AbstractGenerator* generator = new Breath();
 
 void initLight() {
   FastLED.addLeds<WS2813, LIGHTPIN, GRB>(leds, PIXELS);
@@ -31,8 +31,7 @@ void initLight() {
 }
 
 void processLeds() {
-  generator->step(leds);
-  FastLED.show();
+  if (generator->step(leds)) FastLED.show();
 }
 
 #endif
