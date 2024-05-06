@@ -10,7 +10,7 @@ class Angle : public AbstractGenerator {
   Angle() {
     short maxIdx = 0, maxY=0;
     for (int step = 1; step < STAIRS; step++) {
-      int y = (stepsize[step] / 2) - b - (a * step);
+      int y = (stairSize[step] / 2) - b - (a * step);
       if(maxY < y){
         maxY = y;
         maxIdx = step;
@@ -19,7 +19,7 @@ class Angle : public AbstractGenerator {
     start = maxY;
 
     for (int step = 1; step < STAIRS; step++) {
-      int y = (-stepsize[step] / 2) - b - (a * step);
+      int y = (-stairSize[step] / 2) - b - (a * step);
       if (maxY > y) {
         maxY = y;
         maxIdx = step;
@@ -36,11 +36,11 @@ class Angle : public AbstractGenerator {
     for (int step = 0; step < STAIRS; step++) {
       int y = step * a + curr + b;
 
-      int border = (stepsize[step] / 2) + y;
+      int border = (stairSize[step] / 2) + y;
       border = (border > 0) ? border : 0;
 
-      for (int ledInStep = 0; ledInStep < stepsize[step]; ledInStep++) {
-        short idx = stepOffset[step] + ledInStep;
+      for (int ledInStep = 0; ledInStep < stairSize[step]; ledInStep++) {
+        short idx = stairOffset[step] + ledInStep;
         if (ledInStep < border) {
           leds[idx] = CRGB(0, 0, 0);
         } else {
@@ -64,8 +64,8 @@ class Angle : public AbstractGenerator {
   void settings(String setting, String value) {}
 
  private:
-  short a = 5, b = 0;
-  short maxLength = getMax(stepsize, STAIRS);
+  short a = 10, b = 0;
+  short maxLength = getMax(stairSize, STAIRS);
   short start = 20;
   short stop = -20;
   short curr = start;

@@ -11,11 +11,11 @@ class Vertical : public AbstractGenerator {
     if (laststep > millis()) return false;
 
     for (int step = 0; step < STAIRS; step++) {
-      int border = (stepsize[step] / 2) + curr;
+      int border = (stairSize[step] / 2) + curr;
       border = (border > 0) ? border : 0;
 
-      for (int ledInStep = 0; ledInStep < stepsize[step]; ledInStep++) {
-        short idx = stepOffset[step] + ledInStep;
+      for (int ledInStep = 0; ledInStep < stairSize[step]; ledInStep++) {
+        short idx = stairOffset[step] + ledInStep;
         if (ledInStep < border) {
           leds[idx] = CRGB(0, 0, 0);
         } else {
@@ -39,7 +39,7 @@ class Vertical : public AbstractGenerator {
   void settings(String setting, String value) {}
 
  private:
-  short maxLength = getMax(stepsize, STAIRS);
+  short maxLength = getMax(stairSize, STAIRS);
   short start = maxLength - (maxLength / 2);
   short stop = (maxLength / 2) - maxLength;
   short curr = start;

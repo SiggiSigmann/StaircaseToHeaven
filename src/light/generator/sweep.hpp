@@ -13,7 +13,7 @@ class Sweep : public AbstractGenerator {
       byte blue = bVal * 51;
       byte green = gVal * 51;
 
-      fill(CRGB(red, green, blue), stepOffset[nextStair], stepsize[nextStair],
+      fill(CRGB(red, green, blue), stairOffset[nextStair], stairSize[nextStair],
            leds);
 
       lastNewStair = millis() + 200;
@@ -21,14 +21,13 @@ class Sweep : public AbstractGenerator {
     }
 
     for (int i = 0; i < STAIRS; i++) {
-      CRGB stairColor = leds[stepOffset[i]];
+      CRGB stairColor = leds[stairOffset[i]];
 
       byte red = stairColor.red < rVal ? 0 : stairColor.r - rVal;
       byte blue = stairColor.blue < bVal ? 0 : stairColor.blue - bVal;
       byte green = stairColor.green < gVal ? 0 : stairColor.green - gVal;
 
-      fill(CRGB(red, green, blue), stepOffset[i], stepsize[i],
-           leds);
+      fill(CRGB(red, green, blue), stairOffset[i], stairSize[i], leds);
     }
 
     return true;
@@ -39,9 +38,9 @@ class Sweep : public AbstractGenerator {
  private:
   unsigned long lastNewStair = 0;
   byte nextStair = 0;
-  int rVal = 5;
+  int rVal = 0;
   int bVal = 2;
-  int gVal = 0;
+  int gVal = 5;
 };
 
 #endif

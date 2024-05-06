@@ -14,19 +14,19 @@ class StepByStep : public AbstractGenerator {
 
     // reset
     if (nextStep == 0) {
-      for (int j = 0; j < stepsize[STAIRS - 1]; j++) {
-        int idx = j + stepOffset[STAIRS - 1];
+      for (int j = 0; j < stairSize[STAIRS - 1]; j++) {
+        int idx = j + stairOffset[STAIRS - 1];
         leds[idx] = CRGB(0, 0, 0);
       }
     } else {
-      for (int j = 0; j < stepsize[nextStep - 1]; j++) {
-        int idx = j + stepOffset[nextStep - 1];
+      for (int j = 0; j < stairSize[nextStep - 1]; j++) {
+        int idx = j + stairOffset[nextStep - 1];
         leds[idx] = CRGB(0, 0, 0);
       }
     }
 
-    fill(CRGB(r[nextStep], g[nextStep], b[nextStep]), stepOffset[nextStep],
-         stepsize[nextStep], leds);
+    fill(CRGB(r[nextStep], g[nextStep], b[nextStep]), stairOffset[nextStep],
+         stairSize[nextStep], leds);
     return true;
   }
 
