@@ -9,27 +9,27 @@
 CRGB leds[PIXELS];
 
 #define STAIRS 12
-byte stepsize[STAIRS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
-short stepOffset[STAIRS] = {0};
+byte stairSize[STAIRS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
+short stairOffset[STAIRS] = {0};
 
-#include "generator/angle.hpp"
 #include "generator/generator.hpp"
+#include "generator/rotateGenerators.hpp"
 AbstractGenerator* generator;
 
 void initLight() {
-  generator = new Angle();
+  generator = new RotateGenerators();
 
   Serial.println("Pixels: " + String(PIXELS) + " Stairs: " + String(STAIRS));
 
-  FastLED.addLeds<WS2813, LIGHTPIN, GRB>(leds, PIXELS);
+  FastLED.addLeds<WS2811, LIGHTPIN, GRB>(leds, PIXELS);
   FastLED.clear();
-  FastLED.setBrightness(100);
+  FastLED.setBrightness(150);
 
   // init stairOffset
   int offset = 0;
   for (unsigned int i = 0; i < STAIRS; i++) {
-    stepOffset[i] = offset;
-    offset += stepsize[i];
+    stairOffset[i] = offset;
+    offset += stairSize[i];
   }
   FastLED.show();
 }
