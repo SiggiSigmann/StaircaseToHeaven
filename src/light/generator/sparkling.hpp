@@ -9,7 +9,7 @@ class Sparkling : public AbstractGenerator {
  public:
   bool step(CRGB *leds) {
     if (laststep > millis()) return false;
-    laststep = millis() + (esp_random() % 200);
+    laststep = millis() + (esp_random() % 100);
 
     for (int i = 0; i < PIXELS; i++) {
       if (esp_random() % 50 >= 48) {

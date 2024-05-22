@@ -5,11 +5,11 @@
 #include "../_util.hpp"
 #include "../light.h"
 
-class BlackGenerator : public AbstractGenerator
+class ConstantGenerator : public AbstractGenerator
 {
 public:
  bool step(CRGB *leds) {
-   if (!alreadyDone) fill(0x2aef00, 0, PIXELS, leds);
+   if (!alreadyDone) fill(0xFF00FF, 0, PIXELS, leds);
    alreadyDone = true;
    return alreadyDone;
  }

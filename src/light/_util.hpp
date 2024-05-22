@@ -51,7 +51,7 @@ void combine(uint32_t color, int start, int size, CRGB *leds)
     }
 }
 
-int getMax(byte arr[], int size) {
+int getMax(short arr[], int size) {
   if (size == 0) {
     // Return some default value if the array is empty
     return 0;

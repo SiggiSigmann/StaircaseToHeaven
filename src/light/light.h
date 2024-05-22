@@ -5,25 +5,25 @@
 
 #include "pin.h"
 
-#define PIXELS 571
+#define PIXELS 570
 CRGB leds[PIXELS];
 
 #define STAIRS 12
-byte stairSize[STAIRS] = {42, 43, 43, 48, 62, 50, 47, 47, 47, 47, 47, 47};
+short stairSize[STAIRS] = {42, 43, 43, 47, 62, 50, 47, 47, 47, 47, 47, 47};
 short stairOffset[STAIRS] = {0};
 
 #include "generator/generator.hpp"
-#include "generator/rotateGenerators.hpp"
+#include "generator/nightsky.hpp"
 AbstractGenerator* generator;
 
 void initLight() {
-  generator = new RotateGenerators();
+  generator = new NightSky();
 
   Serial.println("Pixels: " + String(PIXELS) + " Stairs: " + String(STAIRS));
 
   FastLED.addLeds<WS2811, LIGHTPIN, GRB>(leds, PIXELS);
   FastLED.clear();
-  FastLED.setBrightness(150);
+  FastLED.setBrightness(255);
 
   // init stairOffset
   int offset = 0;

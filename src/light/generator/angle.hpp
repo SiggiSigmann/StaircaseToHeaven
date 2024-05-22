@@ -8,35 +8,25 @@
 class Angle : public AbstractGenerator {
  public:
   Angle() {
-    short maxIdx = 0, maxY=0;
-    for (int step = 1; step < STAIRS; step++) {
-      int y = (stairSize[step] / 2) - b - (a * step);
-      if(maxY < y){
-        maxY = y;
-        maxIdx = step;
-      }
-    }
-    start = maxY;
+    for (int step = 0; step < STAIRS; step++) {
+      int yUp = getUpperPart(stairSize[step]);
+      int tUp = yUp - (step * a);
+      if (start < tUp) start = tUp;
 
-    for (int step = 1; step < STAIRS; step++) {
-      int y = (-stairSize[step] / 2) - b - (a * step);
-      if (maxY > y) {
-        maxY = y;
-        maxIdx = step;
-      }
+      int yDown = getLowerPart(stairSize[step]);
+      int tDown = yDown - (step * a);
+      if (stop > tDown) stop = tDown;
     }
-    stop = maxY-1;
     curr = stop;
-    Serial.println(String(start) + " " + String(stop));
   }
 
   bool step(CRGB *leds) {
     if (laststep > millis()) return false;
 
     for (int step = 0; step < STAIRS; step++) {
-      int y = step * a + curr + b;
+      int y = step * a + curr;
 
-      int border = (stairSize[step] / 2) + y;
+      int border = getUpperPart(stairSize[step]) + y;
       border = (border > 0) ? border : 0;
 
       for (int ledInStep = 0; ledInStep < stairSize[step]; ledInStep++) {
@@ -52,10 +42,10 @@ class Angle : public AbstractGenerator {
     laststep = millis() + 100;
     if (direction) {
       curr += 1;
-      if (curr >= start) direction = false;
+      if (curr > start) direction = false;
     } else {
       curr -= 1;
-      if (curr <= stop) direction = true;
+      if (curr < stop) direction = true;
     }
 
     return true;
@@ -64,13 +54,15 @@ class Angle : public AbstractGenerator {
   void settings(String setting, String value) {}
 
  private:
-  short a = 10, b = 0;
-  short maxLength = getMax(stairSize, STAIRS);
-  short start = 20;
-  short stop = -20;
-  short curr = start;
+  short a = 10;
+  short start = 0;
+  short stop = -0;
+  short curr = 0;
   unsigned long laststep = 0;
   bool direction = true;
+
+  int getUpperPart(int leds) { return leds / 2; }
+  int getLowerPart(int leds) { return (-leds / 2) + ((leds % 2) ? 0 : 1); }
 };
 
 #endif
