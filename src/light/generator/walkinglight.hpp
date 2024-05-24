@@ -19,6 +19,7 @@ class WalkingLight : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   int pixel = 0;

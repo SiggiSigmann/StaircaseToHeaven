@@ -7,6 +7,8 @@
 #include "pin.h"
 #include "secrets.h"
 
+#include "telegram/telegram.h"
+
 BasicOTA OTA;
 
 void setup() {
@@ -26,6 +28,9 @@ void setup() {
 
   Serial.println("start OTA");
   OTA.begin();
+
+  Serial.println("telegram");
+  setupBot();
 
   Serial.println("started");
   Serial.println("------------------------------------");

@@ -31,6 +31,7 @@ class StepByStep : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   byte r[STAIRS] = {21, 42, 63, 84, 105, 126, 147, 168, 189, 210, 231, 255};

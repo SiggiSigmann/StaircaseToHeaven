@@ -54,6 +54,7 @@ class RotateGenerators : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   unsigned long lastChange = 0;

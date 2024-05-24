@@ -37,6 +37,7 @@ class Vertical : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   short maxLength = getMax(stairSize, STAIRS);

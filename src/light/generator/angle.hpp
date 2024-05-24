@@ -52,6 +52,7 @@ class Angle : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   short a = 10;

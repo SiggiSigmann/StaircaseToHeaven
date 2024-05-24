@@ -21,6 +21,7 @@ class Breath : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   int brightness = 0;

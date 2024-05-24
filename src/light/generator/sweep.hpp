@@ -34,6 +34,7 @@ class Sweep : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   unsigned long lastNewStair = 0;

@@ -23,6 +23,7 @@ class Sparkling : public AbstractGenerator {
   }
 
   void settings(String setting, String value) {}
+  String getSettings() { return ""; }
 
  private:
   unsigned long laststep = 0;

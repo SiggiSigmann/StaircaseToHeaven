@@ -39,14 +39,16 @@ class NightSky : public AbstractGenerator {
     return true;
   }
 
-  void settings(String setting, String value) {}
+  void settings(String setting, String value) { v = value.toInt(); }
+  String getSettings() { return ""; }
 
  private:
   byte brignesses[PIXELS] = {0};
   int shouldBeOn = 8;
   byte cooldown = 1;
+  byte v = 0;
 
-  CRGB getColor(byte val) { return CRGB(0, val, val / 3); }
+  CRGB getColor(byte val) { return CRGB(v, val, val / 3); }
 };
 
 #endif
